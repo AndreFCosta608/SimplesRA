@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<title>Simples realidade aumentada em vanilaJS/HTML5</title>
+		
+	</head>
+	<body>
+
+		<table border="1">
+			<tr>
+				<td>
+					<canvas id="canvasRA" name="canvasRA" width="640" height="480"></canvas>
+				</td>
+				<td>
+					<canvas id="screenshot-canvas" name="screenshot-canvas" width="640" height="480"></canvas>
+				</td>
+			</tr>
+			<tr>
+            	<td colspan="2" align="center">
+            		<button type="button" onclick="ativaCaptura();">Ligar Câmera</button>
+            		<button type="button" onclick="capturaImagem();">Captura Foto</button>
+            		<button type="button" onclick="downloadImage();">Salvar Foto</button>
+                </td>
+            </tr>
+            <tr>
+            	<td colspan="2" align="center">
+            		<table>
+            			<tr>
+            				<td>
+            					<table>
+            						<tr>
+            							<td>
+            								<img id="cearenseIMG" src="imagens/cearense.png" width="100" height="100">
+            							</td>
+            						</tr>
+            						<tr>
+            							<td align="center">
+            								<input type="radio" name="chapeu" id="cearense" value="1" checked="checked" >
+            							</td>
+            						</tr>
+            					</table>
+            				</td>
+            				<td>
+	            				<table>
+	            					<tr>
+	            						<td>
+	            							<img id="bruxaIMG" src="imagens/bruxa.png" width="100" height="100">
+	            						</td>
+	            					</tr>
+	            					<tr>
+	            						<td align="center">
+	            							<input type="radio" name="chapeu" id="bruxa" value="2">
+	            						</td>
+	            					</tr>
+	            				</table>
+	            			</td>
+            				<td>
+            					<table>
+            						<tr>
+            							<td>
+            								<img id="niverIMG" src="imagens/niver.png" width="100" height="100">
+            							</td>
+            						</tr>
+            						<tr>
+            							<td align="center">
+            								<input type="radio" name="chapeu" id="niver" value="3">
+            							</td>
+            						</tr>
+            					</table>
+            				</td>
+            				<td>
+	            				<table>
+	            					<tr>
+	            						<td>
+	            							<img id="peraltaIMG" src="imagens/peralta.png" width="100" height="100">
+	            						</td>
+	            					</tr>
+	            					<tr>
+	            						<td align="center">
+	            							<input type="radio" name="chapeu" id="peralta" value="4">
+	            						</td>
+	            					</tr>
+	            				</table>
+	            			</td>
+	            			<td>
+	            				<table>
+	            					<tr>
+	            						<td>
+	            							<img id="policiaIMG" src="imagens/policia.png" width="100" height="100">
+	            						</td>
+	            					</tr>
+	            					<tr>
+	            						<td align="center">
+	            							<input type="radio" name="chapeu" id="policia" value="5">
+	            						</td>
+	            					</tr>
+	            				</table>
+	            			</td>
+	            			<td>
+	            				<table>
+	            					<tr>
+	            						<td>
+	            							<img id="praiaIMG" src="imagens/praia.png" width="100" height="100">
+	            						</td>
+	            					</tr>
+	            					<tr>
+	            						<td align="center">
+	            							<input type="radio" name="chapeu" id="praia" value="6">
+	            						</td>
+	            					</tr>
+	            				</table>
+	            			</td>
+	            			<td>
+	            				<table>
+	            					<tr>
+	            						<td>
+	            							<img id="vikingIMG" src="imagens/viking.png" width="100" height="100">
+	            						</td>
+	            					</tr>
+	            					<tr>
+	            						<td align="center">
+	            							<input type="radio" name="chapeu" id="viking" value="7">
+	            						</td>
+	            					</tr>
+	            				</table>
+	            			</td>
+	            			<td>
+	            				<table>
+	            					<tr>
+	            						<td>
+	            							<img id="twdIMG" src="imagens/twd.png" width="100" height="100">
+	            						</td>
+	            					</tr>
+	            					<tr>
+	            						<td align="center">
+	            							<input type="radio" name="chapeu" id="twd" value="8">
+	            						</td>
+	            					</tr>
+	            				</table>
+	            			</td>
+	            			<td>
+	            				<table>
+	            					<tr>
+	            						<td>
+	            							<img id="pirataIMG" src="imagens/pirata.png" width="100" height="100">
+	            						</td>
+	            					</tr>
+	            					<tr>
+	            						<td align="center">
+	            							<input type="radio" name="chapeu" id="pirata" value="8">
+	            						</td>
+	            					</tr>
+	            				</table>
+	            			</td>
+            			</tr>
+            		</table>
+            	</td>
+            </tr>
+		</table>
+		<video id="video" playsinline="" autoplay="" width="640" height="480" style="display:none;"></video> <!-- style="display:none;"  -->
+
+		<!-- scripts evocados no final para que os elementos de tela sejam declarados primeiro -->
+        <script type="text/javascript" src="jsfeat/build/jquery.min.js"></script>
+        <script type="text/javascript" src="jsfeat/build/jsfeat-min.js"></script>
+        <script type="text/javascript" src="jsfeat/cascades/frontalface.js"></script>
+        
+        <script type="text/javascript" src="scritps.js"></script>	
+        <!-- scripts evocados no final para que os elementos de tela sejam declarados primeiro -->
+	</body>
+</html>
