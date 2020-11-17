@@ -7,7 +7,7 @@
  * 		Devido às restrições de CORS dos navegadores, a carga das imagens dos apretrechos somente pode ser dar dentro do mesmo servidor/dominio. Por isto não roda local. 
  * 		Para rodar local é preciso acessar as regras do navegador e desabititar a validação de CORS. 
  */
-			'use strict';
+		'use strict';
 			
 			var rbCearense = document.getElementById("cearense");
             var rbBruxa = document.getElementById("bruxa");
@@ -23,7 +23,11 @@
 			const canvasRA = document.getElementById('canvasRA');
 			const canvas = document.getElementById('screenshot-canvas');
 			
-			const constraints = { audio: false, video: { width: 1280, height: 720 }};
+			//const constraints = { audio: false, video: { width: 1280, height: 720 }};
+			const constraints = { audio: false, video: { width: 1280, height: 720, facingMode: { exact: "environment" }  }};
+			
+			//video: { } 
+			
 			const canvasWidth = 640;
 			const canvasHeight = 480;
 			const tempoClock = 100;
@@ -51,21 +55,55 @@
             contextProcess.fillStyle = "rgb(0,255,0)";
             contextProcess.strokeStyle = "rgb(0,255,0)";
 			
-			async function ativaCaptura() {
-				try {
-			        const stream = await navigator.mediaDevices.getUserMedia(constraints);
-			        handleSuccess(stream);
-			        setTimeout(processaImagem, tempoClock);
-			    } catch (e) {
-			        //errorMsgElement.value = 'navigator.getUserMedia error:' + e.toString();
-			    }}
-			
-			function handleSuccess(stream) {
-			    window.stream = stream;
-			    video.srcObject = stream;
-			}
-			
-			function processaImagem() {
+             function ativaCaptura() {
+            	 //para rodar em um servidor dentro do loopback não é necessário muita coisa. Mas para hospedar em um servidor na nuvem precisa habilitar¨o https e apelar para o compability...
+            	 try {
+                     var attempts = 0;
+                     var readyListener = function(event) {
+                         findVideoSize();
+                     };
+                     var findVideoSize = function() {
+                         if(video.videoWidth > 0 && video.videoHeight > 0) {
+                             video.removeEventListener('loadeddata', readyListener);
+                             onDimensionsReady(video.videoWidth, video.videoHeight);
+                         } else {
+                             if(attempts < 10) {
+                                 attempts++;
+                                 setTimeout(findVideoSize, 200);
+                             } else {
+                                 onDimensionsReady(640, 480);
+                             }
+                         }
+                     };
+                     var onDimensionsReady = function(width, height) {
+                         compatibility.requestAnimationFrame(tick);
+                     };
+                     video.addEventListener('loadeddata', readyListener);
+                     compatibility.getUserMedia({video: true}, function(stream) {
+                         if(video.srcObject !== undefined){
+                             video.srcObject = stream
+                         } else {
+                             try {
+                                 video.src = compatibility.URL.createObjectURL(stream);
+                             } catch (error) {
+                                 video.src = stream;
+                             }
+                         }
+                         setTimeout(function() {
+                                 video.play();
+                             }, 500);
+                     }, function (error) {
+                         $('#no_rtc').html('<h4>WebRTC not available.</h4>');
+                         $('#no_rtc').show();
+                     });
+                 } catch (error) {
+                     $('#no_rtc').html('<h4>Something goes wrong...</h4>');
+                     $('#no_rtc').show();
+                 }
+             }
+            	 
+             function tick() {
+                compatibility.requestAnimationFrame(tick);
 				if (video.readyState === video.HAVE_ENOUGH_DATA) {
 					try{
 						contextProcess.drawImage(video, 0, 0, canvasWidth, canvasHeight);

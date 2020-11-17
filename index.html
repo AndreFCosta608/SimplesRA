@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta http-equiv="Access-Control-Allow-Origin" content="*">
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		
 		<title>Simples realidade aumentada em vanilaJS/HTML5</title>
 		
+		<script type="text/javascript">
+			if (window.location.protocol != "https:") {
+				location.replace(`https:${location.href.substring(location.protocol.length)}`);
+			}
+		</script>
+		<script type="text/javascript" src="jsfeat/build/jquery.min.js"></script>
+        <script type="text/javascript" src="jsfeat/build/jsfeat-min.js"></script>
+        <script type="text/javascript" src="jsfeat/build/compatibility.js"></script>
+        <script type="text/javascript" src="jsfeat/cascades/frontalface.js"></script>
+        		
 	</head>
 	<body>
-
+		<video id="video" playsinline="" autoplay="" width="640" height="480" style="display:none;"></video> <!-- style="display:none;"  -->
+		<div id="no_rtc" class="alert alert-error" style="display:none;"></div>
 		<table border="1">
 			<tr>
 				<td>
@@ -160,14 +172,13 @@
             	</td>
             </tr>
 		</table>
-		<video id="video" playsinline="" autoplay="" width="640" height="480" style="display:none;"></video> <!-- style="display:none;"  -->
-
-		<!-- scripts evocados no final para que os elementos de tela sejam declarados primeiro -->
+		<!-- scripts evocados no final para que os elementos de tela sejam declarados primeiro
         <script type="text/javascript" src="jsfeat/build/jquery.min.js"></script>
         <script type="text/javascript" src="jsfeat/build/jsfeat-min.js"></script>
         <script type="text/javascript" src="jsfeat/cascades/frontalface.js"></script>
         
         <script type="text/javascript" src="scritps.js"></script>	
-        <!-- scripts evocados no final para que os elementos de tela sejam declarados primeiro -->
+        scripts evocados no final para que os elementos de tela sejam declarados primeiro -->
+        <script type="text/javascript" src="scritps.js"></script>
 	</body>
 </html>

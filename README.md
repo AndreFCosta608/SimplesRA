@@ -18,3 +18,12 @@ arquivos.
 	Para rodar em servidores publicados na web requer suporte HTTPS.
 	Se não atender às restrições de segurança o próprio navegador impede o acesso à camera.
 	Observando que mesmo dentro de um ambiente seguro, é necessária a permissão do usuário para liberar o acesso à câmera.
+	
+	
+	Demo funcional em: www.wind.net.br/simplesRaWeb
+	
+	---->>> IPC!!!! <<<----
+	Para conseguir rodar em um servidor IIS VPS foi necessário ativar o HTTPS com um certificado válido de terceiros. 
+	Foi preciso gerar um certificado (free) em https://www.sslforfree.com. Não serviu certificado autoassinado.
+	Converter para o padrão do IIS com o OpenSSL e habilitar no domínio.
+	Foi preciso também uma pequena gambiarra utilizando o “compability.js”.
